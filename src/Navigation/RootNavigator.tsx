@@ -4,9 +4,12 @@ import {
   NativeStackScreenProps,
 } from "@react-navigation/native-stack";
 import OnBoardingScreen from "../Screens/OnBoardingScreen";
+import TabsNavigator, { TabsStackParams } from "./TabsNavigation";
+import { NavigatorScreenParams } from "@react-navigation/native";
 
 export type RootStackParams = {
   OnBoardingScreen: undefined;
+  TabsStack: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParams>();
@@ -19,6 +22,11 @@ const RootNavigator = () => {
       <RootStack.Screen
         name="OnBoardingScreen"
         component={OnBoardingScreen}
+        options={{ headerShown: false }}
+      />
+      <RootStack.Screen
+        name="TabsStack"
+        component={TabsNavigator}
         options={{ headerShown: false }}
       />
     </RootStack.Navigator>

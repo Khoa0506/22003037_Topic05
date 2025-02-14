@@ -89,8 +89,8 @@ const OnBoardingButton = ({
             index: flatListIndex.value + 1,
           });
         } else {
-          // navigation.replace("TabsStack", { screen: "Home" })
-          alert("Click here to START shopping online!!!");
+          navigation.replace("TabsStack");
+          //alert("Click here to START shopping online!!!");
         }
       }}
     >
