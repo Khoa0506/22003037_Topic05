@@ -27,9 +27,9 @@ const HomeScreen = ({ navigation, route }: TabsStackScreenProps<"Home">) => {
     navigation.navigate("Cart");
   };
   const sliderImages = [
-    "https://cdn.tuoitre.vn/471584752817336320/2025/2/11/edit-4777768226376952389118115503521146827030165n-17392846395421224095965.jpeg", // Network image
-    "https://cdn-media.sforum.vn/storage/app/media/wp-content/uploads/2023/10/tho-chuc-tet-hai-huoc-thumbnail.jpg",
-    "https://i.ytimg.com/vi/OvUolZfo1Qc/maxresdefault.jpg",
+    "https://i1-vnexpress.vnecdn.net/2021/09/15/BAI-2022-Nissan-GT-R-JDM-6-5647-1631698125.jpg?w=1020&h=0&q=100&dpr=1&fit=crop&s=f9kHXkk7I3tDwEqmuGkFUw", // Network image
+    "https://otoxemay.vn/storage/images/2024/06/6501718855139-nissan-khai-tu-huyen-thoai-gt-r-r35-anhdaidien.jpg",
+    "https://photo.znews.vn/w1200/Uploaded/aobhuua/2022_12_28/Nissan_GT_Sebastian_Vettel_17.png",
     "https://bizweb.dktcdn.net/thumb/1024x1024/100/408/770/products/d373f758-620f-4da0-b31e-6c993c0195fe.jpg",
     // require("../../assets/sliderImages/hand.png"),
     // require("../../assets/sliderImages/location.png"),
@@ -143,7 +143,7 @@ const HomeScreen = ({ navigation, route }: TabsStackScreenProps<"Home">) => {
                 }}
                 catProps={{
                   onPress: () => Alert.alert(item.name),
-                  imageBg: bgImg,
+                  imageBg: item.images.length > 0 ? item.images[0] : "",
                 }}
               />
             ))

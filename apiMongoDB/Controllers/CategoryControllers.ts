@@ -44,7 +44,7 @@ export const updateCategory = async (req: Request, res: Response) => {
   const files = req.files as [Express.Multer.File];
 
   if (files) {
-    const images = files.map((file: Express.Multer.File) => file.filename);
+    const images = files.map((file) => `${path}${file.filename}`);
 
     try {
       const catUpdate = await CATEGORIES.findByIdAndUpdate(
