@@ -16,6 +16,11 @@ interface IProdByCatProps {
   >;
 }
 
+interface ITrendingProductProps {
+  setTrendingProducts: React.Dispatch<
+    React.SetStateAction<ProductListParams[]>
+  >;
+}
 export const fetchCategories = async ({ setGetCategory }: ICatProps) => {
   try {
     const response = await axios.get(
@@ -73,5 +78,33 @@ export const fetchProductsByCatID = async ({
   } catch (error) {
     console.log("axios get error", error);
     setGetProductsByCatID([]);
+  }
+};
+export const fetchTrendingProducts = async ({
+  setTrendingProducts,
+}: ITrendingProductProps) => {
+  try {
+    const response: FetchProductsParams = await axios.get(
+      "http://10.2.2.2::8888/product/getTrendingProducts"
+    );
+    console.log("API Response:", response.data);
+
+    if (Array.isArray(response.data)) {
+      const fixedData = response.data.map((item) => ({
+        ...item,
+        images: item.images.map((img: string) =>
+          img.replace("http://localhost", "http://10.0.2.2")
+        ),
+      }));
+      setTrendingProducts(fixedData);
+    } else {
+      console.warn(
+        "fetchCategories: Dữ liệu API không phải là mảng",
+        response.data
+      );
+    }
+  } catch (error) {
+    console.log("axios get error", error);
+    setTrendingProducts([]);
   }
 };

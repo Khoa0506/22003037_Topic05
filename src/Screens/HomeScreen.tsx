@@ -19,6 +19,7 @@ import {
 } from "../MiddleWares/HomeMiddleWare";
 import { useFocusEffect } from "@react-navigation/native";
 import { getProductByID } from "./../../apiMongoDB/Controllers/ProductControllers";
+import { ProductCard } from "../Components/HomeScreenComponent/ProductCard";
 
 type Props = {};
 
@@ -43,6 +44,10 @@ const HomeScreen = ({ navigation, route }: TabsStackScreenProps<"Home">) => {
   useEffect(() => {
     fetchCategories({ setGetCategory });
   }, []);
+
+  useEffect(() => {
+    fetchCategories({ setGetCategory });
+  });
 
   useEffect(() => {
     console.log("fetchProductByCatID:", fetchProductsByCatID);
@@ -151,6 +156,66 @@ const HomeScreen = ({ navigation, route }: TabsStackScreenProps<"Home">) => {
             <Text> Không có sản phẩm nào </Text>
           )}
         </ScrollView>
+      </View>
+      <View
+        style={{
+          backgroundColor: "purple",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          marginTop: 10,
+        }}
+      >
+        <Text
+          style={{
+            color: "yellow",
+            fontSize: 14,
+            fontWeight: "bold",
+            padding: 10,
+          }}
+        >
+          Trending Deals of the Week
+        </Text>
+      </View>
+      <View
+        style={{
+          backgroundColor: "#fff",
+          borderWidth: 7,
+          borderColor: "green",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
+        {trendingProducts.map((item, index) => (
+          <ProductCard
+            item={{
+              _id: item?._id || index.toString(),
+              name: item?.name || "No Name",
+              images: item?.images || [""],
+              price: item?.price || 0,
+              oldPrice: item?.oldPrice || item?.price || 0,
+              description: item?.description || "No description available",
+              quantity: item?.quantity ?? 1,
+              inStock: item?.inStock ?? true,
+              isFeatured: Boolean(item?.isFeatured),
+              category: item?.category?.toString() || "Uncategorized",
+            }}
+            key={index}
+            pStypeProps={{
+              resizeMode: "contain",
+              width: productWidth,
+              height: 90,
+              marginBottom: 5,
+            }}
+            productProps={{
+              imageBg: bgImg,
+              onPress: () => {
+                navigation.navigate("productDetails", item);
+              },
+            }}
+          ></ProductCard>
+        ))}
       </View>
     </SafeAreaView>
   );
